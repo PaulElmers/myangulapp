@@ -1,0 +1,35 @@
+<!-- register.component.html -->
+<form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+    <label for="username">Ім'я користувача:</label>
+    <input id="username" formControlName="username" required />
+    <div *ngIf="registerForm.get('username').touched && registerForm.get('username').invalid">
+      Ім'я користувача є обов'язковим.
+    </div>
+  
+    <label for="email">Email:</label>
+    <input id="email" formControlName="email" required />
+    <div *ngIf="registerForm.get('email').touched && registerForm.get('email').invalid">
+      Введіть валідний email.
+    </div>
+  
+    <label for="password">Пароль:</label>
+    <input id="password" type="password" formControlName="password" required />
+    <div *ngIf="registerForm.get('password').touched && registerForm.get('password').invalid">
+      Пароль повинен містити мінімум 6 символів.
+    </div>
+  
+    <label for="confirmPassword">Підтвердження пароля:</label>
+    <input id="confirmPassword" type="password" formControlName="confirmPassword" required />
+    <div *ngIf="registerForm.errors?.passwordMismatch && registerForm.get('confirmPassword').touched">
+      Паролі не збігаються.
+    </div>
+  
+    <label for="role">Роль:</label>
+    <select id="role" formControlName="role" required>
+      <option value="user">User</option>
+      <option value="admin">Admin</option>
+    </select>
+  
+    <button type="submit" [disabled]="registerForm.invalid">Зареєструватися</button>
+  </form>
+  
